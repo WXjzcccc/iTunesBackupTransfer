@@ -1,6 +1,6 @@
 # iTunesBackupTransfer
 iTunes备份解析
-## Usage
+## Usage1
 ```PlainText
 ~/iTunesBackupTransfer>python3 main.py -h
 usage: main.py [-h] backup_path target_path
@@ -14,7 +14,7 @@ positional arguments:
 optional arguments:
   -h, --help   show this help message and exit
 ```
+## Usage2
+双击`gui.pyw`，选择iTunes备份文件夹，浏览文件目录，选择指定的文件或文件夹并导出，也可以一键导出所有文件
 ## TODO
-1. 加密备份支持
-2. GUI图形化界面
-3. 可选内容导出
+加密备份支持
