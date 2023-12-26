@@ -1,7 +1,7 @@
 # iTunesBackupTransfer
 iTunes备份解析
 ## Usage
-```PowerShell
+```PlainText
 ~/iTunesBackupTransfer>python3 main.py -h
 usage: main.py [-h] backup_path target_path
 
