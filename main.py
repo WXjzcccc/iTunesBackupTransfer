@@ -8,5 +8,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     backup_path = args.backup_path
     target_path = args.target_path
-    parser = Parser(backup_path, target_path)
+    parser = Parser()
+    parser.setDB(backup_path)
+    parser.setFile(backup_path, target_path)
     parser.copy_all()
