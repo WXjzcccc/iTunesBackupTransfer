@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk,filedialog,messagebox,PhotoImage,Label
+from tkinter import ttk,filedialog,messagebox,PhotoImage,Label,simpledialog
 from myparser.Parser import Parser
 import os
 
@@ -49,9 +49,10 @@ def on_menu_selection(item):
     file_path = filedialog.askdirectory()
     values = tree.item(item,'values')
     print("Selected path:", file_path)
+    parser.setFile(backup_path,file_path)
     if file_path == '':
         return
-    parser.copy_selected(values,file_path)
+    parser.copy_selected(values,file_path,enc_flag)
     messagebox.showinfo("提示", "导出成功！")
 
 def on_button1_clicked():
@@ -60,7 +61,7 @@ def on_button1_clicked():
     parser.setFile(backup_path,file_path)
     button1.config(text="正在导出...")
     main.update()
-    parser.copy_all()
+    parser.copy_all(enc_flag)
     button1.config(text="一键导出所有")
     main.update()
     messagebox.showinfo("提示", "导出成功！")
@@ -73,7 +74,23 @@ backup_path = filedialog.askdirectory()
 if backup_path == "":
     exit()
 parser = Parser()
-parser.setDB(backup_path)
+enc_flag = False
+enc_flag = parser.check_encryption(backup_path)
+if enc_flag:
+    while enc_flag:
+        password = simpledialog.askstring("提示", "请输入iTunes备份密码")
+        db = parser.decrypt_db(backup_path,password)
+        print(password)
+        if db != '':
+            enc_flag = False
+            parser.setDB(db)
+        else:
+            tof = messagebox.askquestion("警告", "密码错误，是否重新输入？")
+            if tof == False:
+                exit()
+    enc_flag = True
+else:
+    parser.setDB(backup_path)
 tree = ttk.Treeview(main, columns=(), show="tree headings", displaycolumns=())
 tree.heading("#0", text="文件列表", anchor=W)
 

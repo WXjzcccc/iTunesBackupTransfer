@@ -5,7 +5,11 @@ class DBHelper:
         db_path = db_path.replace('\\','/').replace('//','/')
         if db_path[-1] != '/':
             db_path += '/'
-        self.conn = sqlite3.connect(db_path+'Manifest.db')
+        self.conn = None
+        if db_path.split('/')[-2].startswith('Manifest'):
+            self.conn = sqlite3.connect(db_path[:-1])
+        else:
+            self.conn = sqlite3.connect(db_path+'Manifest.db')
         self.cursor = self.conn.cursor()
 
     def select(self,sql: str) -> list:
