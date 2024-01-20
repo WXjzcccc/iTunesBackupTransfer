@@ -95,10 +95,11 @@ class FileHelper:
                 os.makedirs(dictory,exist_ok=True)
             # fileID的前两位被iTunes作为索引目录，因此需要拼接
             source = self.backup_dir + "/" + file_id[:2] + "/" + file_id
+            source_size = os.path.getsize(source)
             with open(source,'rb') as source:
                 source_data = source.read()
             with open(true_path,'wb') as target:
-                target.write(decrypt_file(keybag,bplist,source_data))
+                target.write(decrypt_file(keybag,bplist,source_data,source_size))
 
     def create_file4(self,file_id: str,file_path: str, flag: int, target_path: str,bplist,  keybag) -> None:
         """
@@ -118,7 +119,8 @@ class FileHelper:
                 os.makedirs(dictory,exist_ok=True)
             # fileID的前两位被iTunes作为索引目录，因此需要拼接
             source = self.backup_dir + "/" + file_id[:2] + "/" + file_id
+            source_size = os.path.getsize(source)
             with open(source,'rb') as source:
                 source_data = source.read()
             with open(true_path,'wb') as target:
-                target.write(decrypt_file(keybag,bplist,source_data))
+                target.write(decrypt_file(keybag,bplist,source_data,source_size))

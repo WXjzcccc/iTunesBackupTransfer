@@ -152,7 +152,7 @@ def decrypt_manifest_db(keybag,password,manifest_key,db_path):
         return decrypted_data
     return b''
 
-def decrypt_file(keybag,bplist,data):
+def decrypt_file(keybag,bplist,data,size):
     """
     @keybag:        Manifest.plist中的Keybag
     @password:      iTunes备份密码
@@ -162,7 +162,6 @@ def decrypt_file(keybag,bplist,data):
     """
     plist = biplist.readPlistFromString(bplist)
     file_data = plist['$objects'][plist['$top']['root'].integer]
-    size = file_data['Size']
     protection_class = file_data['ProtectionClass']
     encryption_key = plist['$objects'][file_data['EncryptionKey'].integer]['NS.data'][4:]
     key = keybag.unwrapKeyForClass(protection_class, encryption_key)

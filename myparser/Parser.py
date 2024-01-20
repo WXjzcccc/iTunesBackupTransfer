@@ -90,8 +90,11 @@ class Parser:
         """
         @flag:      判断是否加密
         """
-        keybag = Keybag(self.keybag)
-        keybag.unlockWithPasscode(self.password.encode('utf8'))
+        try:
+            keybag = Keybag(self.keybag)
+            keybag.unlockWithPasscode(self.password.encode('utf8'))
+        except:
+            pass
         for row in self.get_file_list1():
             file_id = row[0]
             domain = row[1]
@@ -108,6 +111,7 @@ class Parser:
         @flag:      判断是否加密
         """
         dir = ''
+        print(len(values))
         if len(values) == 1:
             dir = values[0]
         elif len(values) == 4:
@@ -115,15 +119,16 @@ class Parser:
         if dir.endswith('/'):
             dir = dir[:-1]
         rows = self.get_childs(dir)
-        keybag = Keybag(self.keybag)
-        keybag.unlockWithPasscode(self.password.encode('utf8'))
+        try:
+            keybag = Keybag(self.keybag)
+            keybag.unlockWithPasscode(self.password.encode('utf8'))
+        except:
+            pass
         if not keepOriginPath:
             for row in rows:
                 tmp = row[1]
-                # tmp = tmp.replace(os.path.dirname(dir)+'/','')
                 if tmp.startswith('/'):
                     tmp = tmp[1:]
-                print('2'+tmp)
                 if flag:
                     self.file.create_file4(row[0],tmp,row[2],path,row[3],keybag)
                 else:
