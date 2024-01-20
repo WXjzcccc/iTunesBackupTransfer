@@ -56,7 +56,7 @@ class Parser:
         return retval
 
     def get_file_list(self) -> list:
-        lst = self.db.select("select fileID,domain,replace(relativePath,':','-'),flags,file from Files")
+        lst = self.db.select("select fileID,domain,replace(relativePath,':','-') path,flags,file from Files order by domain,path")
         retval = []
         for row in lst:
             file_id = row[0]
@@ -72,7 +72,7 @@ class Parser:
         return retval
     
     def get_file_list1(self) -> list:
-        lst = self.db.select("select fileID,domain,replace(relativePath,':','-'),flags,file from Files")
+        lst = self.db.select("select fileID,domain,replace(relativePath,':','-') path,flags,file from Files order by domain,path")
         return lst
 
     def get_roots(self) -> list:
