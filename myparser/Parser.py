@@ -130,7 +130,7 @@ class Parser:
                     self.file.create_file2(row[0],tmp,row[2],path)
         else:
             for row in rows:
-                pass
+                tmp = row[1].split('/')[-1]
                 if flag:
                     self.file.create_file4(row[0],tmp,row[2],path,row[3],keybag)
                 else:
