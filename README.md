@@ -7,6 +7,9 @@ iTunes备份解析
 ## 24.1.8更新
 支持了加密备份
 
+## 24.1.20更新
+修复了若干已知bug
+
 ## 鸣谢
 https://github.com/jfarley248/iTunes_Backup_Reader
 
