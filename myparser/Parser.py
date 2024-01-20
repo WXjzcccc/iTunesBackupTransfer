@@ -110,7 +110,7 @@ class Parser:
         dir = ''
         if len(values) == 1:
             dir = values[0]
-        elif len(values) == 3:
+        elif len(values) == 4:
             dir = values[1]
         if dir.endswith('/'):
             dir = dir[:-1]
